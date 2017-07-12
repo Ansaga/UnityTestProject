@@ -26,8 +26,8 @@ public class ThirdPersonCamera : MonoBehaviour
 		if(GameObject.Find ("FrontPos"))
 			frontPos = GameObject.Find ("FrontPos").transform;
 
-		if(GameObject.Find ("JumpPos"))
-			jumpPos = GameObject.Find ("JumpPos").transform;
+//		if(GameObject.Find ("JumpPos"))
+//			jumpPos = GameObject.Find ("JumpPos").transform;
 
 		//カメラをスタートする
 			transform.position = standardPos.position;	
@@ -43,13 +43,13 @@ public class ThirdPersonCamera : MonoBehaviour
 			// Change Front Camera
 			setCameraPositionFrontView();
 		}
-//		
+		
 //		else if(Input.GetButton("Fire2"))	//Alt
 //		{	
 //			// Change Jump Camera
 //			setCameraPositionJumpView();
 //		}
-//		
+		
 		else
 		{	
 			// return the camera to standard position and direction
@@ -81,11 +81,11 @@ public class ThirdPersonCamera : MonoBehaviour
 		transform.forward = frontPos.forward;
 	}
 
-	void setCameraPositionJumpView()
-	{
-		// Change Jump Camera
-		bQuickSwitch = false;
-				transform.position = Vector3.Lerp(transform.position, jumpPos.position, Time.fixedDeltaTime * smooth);	
-				transform.forward = Vector3.Lerp(transform.forward, jumpPos.forward, Time.fixedDeltaTime * smooth);		
-	}
+//	void setCameraPositionJumpView()
+//	{
+//		// Change Jump Camera
+//		bQuickSwitch = false;
+//				transform.position = Vector3.Lerp(transform.position, jumpPos.position, Time.fixedDeltaTime * smooth);	
+//				transform.forward = Vector3.Lerp(transform.forward, jumpPos.forward, Time.fixedDeltaTime * smooth);		
+//	}
 }

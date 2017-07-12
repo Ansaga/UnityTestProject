@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Game : MonoBehaviour {
 
@@ -11,8 +12,12 @@ public class Game : MonoBehaviour {
   public Text textCount;
 
   void Start() {
-    textCount = GameObject.Find("TextCount").GetComponent<Text>();
-    textScore = GameObject.Find("TextScore").GetComponent<Text>();
+    try {
+      textCount = GameObject.Find("TextCount").GetComponent<Text>();
+      textScore = GameObject.Find("TextScore").GetComponent<Text>();
+    } catch (Exception ex) {
+      //donothing()
+    }
   }
 
   public void SetCollect(int cscore){
