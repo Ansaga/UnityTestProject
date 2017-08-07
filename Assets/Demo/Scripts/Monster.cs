@@ -21,6 +21,7 @@ public class Monster : MonoBehaviour
 	[SerializeField] Character character;
 	[SerializeField] State state;
 	// Patrolling
+	[SerializeField] float patrolThreshold = 5f;
 	[SerializeField] float patrolSpeed = 1f;
 	// Chasing
 	[SerializeField] float chaseDistance = 10f;
@@ -83,7 +84,7 @@ public class Monster : MonoBehaviour
 
 	void Patrol()
 	{
-		if(Vector3.Distance(transform.position, player.transform.position) <= chaseDistance)
+		if(player != null && Vector3.Distance(transform.position, player.transform.position) <= chaseDistance)
 		{
 			target = player;
 			state = State.CHASE;
@@ -92,7 +93,7 @@ public class Monster : MonoBehaviour
 		{
 			agent.speed = patrolSpeed;
 			character.Walk();
-			if(Vector3.Distance(transform.position, waypoints[waypointIdx].transform.position) >= 5)
+			if(Vector3.Distance(transform.position, waypoints[waypointIdx].transform.position) >= patrolThreshold)
 			{
 				agent.SetDestination(waypoints[waypointIdx].transform.position);
 			}
@@ -105,7 +106,7 @@ public class Monster : MonoBehaviour
 
 	void Chase()
 	{
-		if(Vector3.Distance(transform.position, player.transform.position) <= attackDistance)
+		if(player != null && Vector3.Distance(transform.position, player.transform.position) <= attackDistance)
 		{
 			state = State.ATTACK;
 		}
@@ -123,12 +124,12 @@ public class Monster : MonoBehaviour
 
 	void Attack()
 	{
-		if(Vector3.Distance(transform.position, player.transform.position) <= attackDistance)
+		if(player != null && Vector3.Distance(transform.position, player.transform.position) <= attackDistance)
 		{
 			agent.speed = 0;
 			character.Attack();
 		}
-		else if(Vector3.Distance(transform.position, player.transform.position) <= chaseDistance)
+		else if(player != null && Vector3.Distance(transform.position, player.transform.position) <= chaseDistance)
 		{
 			target = player;
 			state = State.CHASE;
